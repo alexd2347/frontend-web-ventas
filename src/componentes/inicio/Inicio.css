@@ -1,0 +1,75 @@
+.inicio-nombre {
+    font-size: 1.2rem;
+    width: 50rem;
+    max-width: 90%;
+    text-align: center;
+    color: var(--negro);
+    margin: 1.5rem 0;
+    font-weight: 400;
+}
+
+.inicio-mensaje {
+    font-size: 1.2em;
+    margin-bottom: 2rem;
+    max-width: 80%;
+    text-align: center;
+    color: var(--negro);
+}
+
+.inicio-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+    width: 1000px;
+    max-width: 95%;
+    margin-bottom: 1rem;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .inicio-menu {
+        gap: .5rem;
+    }
+}
+
+.inicio-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--negro);
+    width: 250px;
+    height: 120px;
+    border-radius: 8px;
+    outline: 2px solid rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.inicio-card:hover {
+    outline-color: var(--claro);
+}
+
+.inicio-card-img {
+    width: 50px;
+    height: auto;
+    margin-bottom: 1rem;
+    padding: 1rem 0 0 0;
+}
+
+.inicio-card div {
+    max-width: 60%;
+    margin-left: 1rem;
+    color: var(--blanco);
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mis-reportes {
+    background-color: blueviolet;
+}
+.whatsapp {
+    background-color: #47C357;
+}

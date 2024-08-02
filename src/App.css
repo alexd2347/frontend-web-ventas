@@ -1,0 +1,227 @@
+:root {
+  --primario: #ae00ff;
+  --gris: rgb(118, 124, 147);
+  --secundario: #9e85ff;
+  --claro: rgb(226, 226, 226);
+  --blanco: #ffffff;
+  --negro: #333;
+  --red: rgb(255, 93, 93);
+
+  --enviada: #ffb8b4;
+  --revision: #ffdfb0;
+  --atendida: #baffbe;
+}
+
+.main {
+  width: 100%;
+}
+
+.version {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 2.3rem;
+  padding: .5px .9rem;
+  background-color: var(--negro);
+  color: var(--blanco);
+  font-size: .8rem;
+  font-weight: 400;
+  z-index: 99999;
+  transition: .3s ease-in-out;
+  border-radius: 1rem 0 0 0;
+}
+
+/*------------------whats----------------------------------*/
+
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 4rem;
+  height: 4rem;
+  background-color: #25D366;
+  border-radius: 5rem 5rem 5rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: float 2s infinite ease-in-out;
+  transition: transform 0.3s;
+}
+
+.whatsapp:hover {
+  transform: scale(1.1);
+}
+
+.img-whatsapp {
+  width: 70%;
+  height: 70%;
+}
+
+
+/*----------------------animaciones----------------*/
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+/*quitar la linea de abajo a todos los elementos de la app*/
+* {
+  text-decoration: none;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.contenido-componentes {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+/*-------------BOTONES-------------*/
+.boton-primario {
+  cursor: pointer;
+  background-color: var(--primario);
+  color: var(--blanco);
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 10px 16px;
+  outline: none;
+  border: none;
+  border: 2px solid var(--negro);
+  transition: .3s ease-in-out;
+}
+
+.boton-primario:hover {
+  filter: saturate(1.5);
+}
+
+.boton-secundario {
+  cursor: pointer;
+  background-color: var(--blanco);
+  color: var(--gris);
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 10px 16px;
+  outline: none;
+  border: none;
+  border: 2px solid var(--gris);
+  transition: .3s ease-in-out;
+}
+
+.boton-secundario:hover {
+  border-color: var(--negro);
+  color: var(--negro);
+}
+
+
+/*-------------------input text-------------------------*/
+
+.input-text {
+  outline: none;
+  width: calc(100% - 32px);
+  margin: 4px 0px;
+  padding: 10px 16px;
+  border: 1px solid var(--claro);
+  border-radius: 8px;
+  font-size: 16px;
+  transition: .3s ease-in-out;
+}
+
+.input-text:focus {
+  border-color: var(--secundario);
+}
+
+
+/*------------------link texto-------------------------*/
+.link-texto {
+  color: var(--secundario);
+}
+
+.link-texto:hover {
+  color: var(--primario);
+}
+
+.label-texto {
+  color: var(--blanco);
+
+}
+
+.separador {
+  width: 100%;
+  height: 3px;
+  border-radius: 10rem;
+  background-color: var(--secundario);
+  margin: 10px 0;
+}
+
+/*-----------------DISTIBUICION CONTENEDORES--------------------------*/
+
+.gap-10px {
+  gap: 10px;
+}
+.flex-wrap-true {
+  flex-wrap: wrap;
+}
+
+.contenedor-horizontal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-horizontal-arriba-centro {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.contenedor-vertical {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-vertical-izquierda-centro {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
