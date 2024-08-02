@@ -9,8 +9,8 @@ function InicioSession() {
     return (
         <div className='inicio-session'>
             <div className='card-inicio-session'>
-                <img src={logo} alt='logo' className='logo-inicio-session' />
-                <h2 className='titulo-inicio-session'>Iniciar sesión</h2>
+            <h1 className="sidebar-titulo">JC</h1>
+                <div className='titulo-inicio-session'>Iniciar sesión</div>
                 <div className='contenedor-vertical-izquierda-centro'>
                     <label className='label-texto'>Usuario</label>
                     <input type='text' placeholder='' className='input-text' />

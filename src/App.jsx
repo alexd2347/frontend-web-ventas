@@ -5,6 +5,7 @@ import Promociones from './componentes/promocion/promocion'
 import Nuevo from './componentes/nuevo/nuevo'
 import PageNotFound from './componentes/pageNotFound/PageNotFound'
 import InicioSession from './componentes/inicio-session/inicioSession'
+import Carrito from './componentes/carrito/carrito'
 import Producto from './ui/producto/producto'
 import './App.css'
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/inicio" element={<Inicio />} />
           <Route path="/promociones" element={<Promociones />} />
           <Route path="/nuevo" element={<Nuevo />} />
+          <Route path="/carrito" element={<Carrito />} />
           <Route path="/producto/:id" element={<Producto />} />
         </Route>
         <Route

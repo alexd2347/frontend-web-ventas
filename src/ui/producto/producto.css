@@ -4,7 +4,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    gap: 20px;
+    gap: 40px;
     padding: 40px;
     margin: 20px;
     width: 1400px;
@@ -30,7 +30,6 @@
     width: 600px;
     max-width: 100%;
     padding: 15px 10px;
-    border-radius: 10px;
     background-color: var(--negro);
     position: relative;
 }
@@ -41,20 +40,19 @@
     justify-content: flex-start;
     align-items: flex-start;
     max-width: calc(25% - 10px);
-    gap: 5px;
+    gap: 10px;
 }
 
 .imagen-pequena {
     cursor: pointer;
     width: 100%;
-    border-radius: 8px;
     outline: 2px solid transparent;
-    transition: 0.3s ease;
     background-color: var(--blanco);
+    transition: 0.3s ease-in-out;
 }
 
 .imagen-pequena:hover {
-    outline: 2px solid var(--claro);
+    transform: scale(1.02);
 }
 
 
@@ -64,13 +62,12 @@
     height: auto;
     object-fit: cover;
     object-position: center;
-    border-radius: 8px;
     background-color: var(--blanco);
     transition: .3s ease-in-out;
 }
 
 .imagen-principal:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
 }
 
 .producto-descripcion-contenedor {

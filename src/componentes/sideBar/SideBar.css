@@ -7,7 +7,7 @@
 }
 
 .logo-title {
-    max-width: 150px;
+    max-width: 100px;
 }
 
 .sidebar-logo {
@@ -16,43 +16,51 @@
 }
 
 .sidebar-titulo {
-    font-size: 1.2rem;
+    font-size: 24px;
     color: var(--blanco);
-    margin-left: 0rem;
+    font-weight: bold;
 }
 
 .sidebar-search {
     outline: none;
+    border: none;
     width: 500px;
-    max-width: 50%;
+    max-width: 40%;
     padding: 10px 16px;
-    border: 1px solid var(--claro);
-    border-radius: 8px;
+    background-color: var(--negro);
+    color: var(--gris);
+    border-bottom: 2px solid var(--gris);
     font-size: 16px;
     transition: .3s ease-in-out;
 }
 
+.sidebar-search:hover {
+    border-color: var(--blanco);
+    color: var(--blanco);
+}
+
 .sidebar-search:focus {
     border-color: var(--secundario);
+    color: var(--blanco);
 }
 
 
 
 
 .sidebar-link {
-    padding: 12px 32px;
-    max-width: 10%;
+    padding: 12px 24px;
+    max-width: 15%;
     height: calc(80% - 32px);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
     transition: .3s ease-in-out;
+    border-bottom: 2px solid transparent;
 }
 
 .sidebar-link:hover {
-    background-color: var(--secundario);
+    border-bottom: 2px solid var(--blanco);
 }
 
 .sidebar-link-name {
@@ -65,5 +73,12 @@
 }
 
 .active {
-    background-color: var(--secundario);
+    border-radius: 0;
+    border-bottom: 2px solid var(--secundario);
+}
+
+.sidebar-carrito {
+    height: 1.5rem;
+    width: auto;
+    filter: invert(1);
 }

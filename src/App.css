@@ -1,7 +1,7 @@
 :root {
   --primario: #ae00ff;
   --gris: rgb(118, 124, 147);
-  --secundario: #9e85ff;
+  --secundario: #b29fff;
   --claro: rgb(226, 226, 226);
   --blanco: #ffffff;
   --negro: #333;
@@ -165,7 +165,7 @@
 }
 
 .link-texto:hover {
-  color: var(--primario);
+  filter: saturate(2);
 }
 
 .label-texto {
