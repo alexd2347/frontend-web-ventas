@@ -27,11 +27,30 @@
     align-items: center;
     width: 400px;
     max-width: calc(95% - 80px);
-    gap: 20px;
+    gap: 30px;
 }
 
 .logo-inicio-session {
     width: 30%;
     padding: 1rem;
     filter: invert(1);
+}
+
+
+.show-password-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Estilo para el checkbox */
+.show-password-container input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Estilo para el label del checkbox */
+.show-password-container label {
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--blanco);
 }

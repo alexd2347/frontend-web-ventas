@@ -1,0 +1,28 @@
+.admin-header {
+    position: sticky;
+    top: 0;
+    background-color: var(--negro);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.admin-opc {
+    color: var(--blanco);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    margin: 5px 10px;
+    border-bottom: 2px solid var(--negro);
+    transition: 0.3s ease-in-out;
+}
+
+.admin-opc:hover {
+    border-bottom: 2px solid var(--secundario);
+}
+
+.admin-opc-activo {
+    border-bottom: 2px solid var(--blanco);
+}

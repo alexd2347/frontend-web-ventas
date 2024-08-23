@@ -35,20 +35,22 @@ const ProductoCard = ({ producto }) => {
     return (
         <Link to={`/producto/${producto.id}`} className="producto-card">
             <img
-                src={imagenActual}
+                src={`${import.meta.env.VITE_URL_API}/uploads/${imagenActual}`}
                 alt={producto.nombre}
                 className={blur ? 'blur' : ''}
             />
-            <h2 className='producto-nombre'>{producto.nombre}</h2>
-            <div className='producto-descripcion'>{producto.descripcion}</div>
-                
+            <div className='producto-nombre'>{producto.nombre}</div>
+            {/*<div className='producto-descripcion'>{producto.descripcion}</div>*/}
+
             {producto.promocion ? (
-                <>
+                <div className='contenedor-precio'>
                     <p className="precio-promocion">De ${producto.precio}</p>
                     <p className="precio"> a ${producto.precioPromocion}</p>
-                </>
+                </div>
             ) : (
-                <p className="precio">${producto.precio}</p>
+                <div className='contenedor-precio'>
+                    <p className="precio">${producto.precio}</p>
+                </div>
             )}
             {producto.promocion && <div className='cuadrito-promocion'>Off</div>}
         </Link>

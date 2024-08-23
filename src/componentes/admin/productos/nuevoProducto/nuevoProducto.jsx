@@ -1,0 +1,357 @@
+import React, { useState, useEffect } from 'react';
+import { CrearProducto } from '../../../../services/productos';
+import imagen from '../../../../assets/imagen.webp';
+import Notificacion from '../../../../ui/notificacion/Notificacion';
+import './nuevoProducto.css';
+
+const NuevoProducto = ({ cerrar }) => {
+    const marcas = [
+        'Abercrombie',
+        'Abercrombie Dama',
+        'Amini',
+        'Amini Dama',
+        'Armani',
+        'Armani Dama',
+        'Burberry',
+        'Burberry Dama',
+        'Calvin Klein',
+        'Calvin Klein Dama',
+        'Coach',
+        'Coach Dama',
+        'Expres',
+        'Expres Dama',
+        'Gucci',
+        'Gucci Dama',
+        'Guess',
+        'Guess Dama',
+        'Hugo Boss',
+        'Hugo Boss Dama',
+        'Karl Lagerfeld',
+        'Karl Lagerfeld Dama',
+        'Kit',
+        'Kit Dama',
+        'Lacoste',
+        'Lacoste Dama',
+        'Louis Vuitton',
+        'Louis Vuitton Dama',
+        'Michael Kors',
+        'Michael Kors Dama',
+        'Nautica',
+        'Nautica Dama',
+        'Palm Angels',
+        'Palm Angels Dama',
+        'Penguin',
+        'Penguin Dama',
+        'Psycho Bunny',
+        'Psycho Bunny Dama',
+        'Ralph Lauren',
+        'Ralph Lauren Dama',
+        'Tommy',
+        'Tommy Dama'
+    ];
+
+    const tiposCamisas = [
+        'Camisa',
+        'Playera',
+        'Blusa',
+        'Sudadera',
+        'Sweater',
+        'Playera Cuello Polo',
+        'Playera Manga Larga',
+    ];
+
+    const tiposPantalones = [
+        'Pantalón',
+        'Jogger',
+        'Shorts',
+    ];
+
+    const colores = [
+        'Amarillo',
+        'Azul',
+        'Beige',
+        'Blanco',
+        'Celeste',
+        'Gris',
+        'Lila',
+        'Cafe',
+        'Morado',
+        'Naranja',
+        'Negro',
+        'Rosa',
+        'Rojo',
+        'Turquesa',
+        'Vino',
+        'Verde',
+    ];
+
+
+    const [notificacion, setNotificacion] = useState(null);
+
+
+    const [nombre, setNombre] = useState('');
+    const [color, setColor] = useState('Negro')
+    const [descripcion, setDescripcion] = useState('');
+    const [marca, setMarca] = useState('Tommy');
+    const [numero, setNumero] = useState(1);
+    const [precio, setPrecio] = useState(0);
+    const [tallas, setTallas] = useState('C,M,G');
+    const [cantidades, setCantidades] = useState([]);
+    const [promocion, setPromocion] = useState(false);
+    const [precioPromocion, setPrecioPromocion] = useState(0);
+    const [tipo, setTipo] = useState('Camisa');
+    const [fotos, setFotos] = useState([]);
+    const [previewFotos, setPreviewFotos] = useState([]);
+
+    const mostrarNotificacion = (mensaje) => {
+        setNotificacion(mensaje);
+        setTimeout(() => {
+            setNotificacion(null);
+        }, 3000);
+    };
+
+    useEffect(() => {
+        setNombre(`${tipo} ${marca} ${numero} ${color}`);
+        setDescripcion(`${tipo} de la prestigiosa marca ${marca} en color ${color} ofrece una combinación perfecta de estilo y comodidad. Disponible en las tallas ${tallas}, es ideal para aquellos que buscan calidad y diseño en su vestimenta. Un must-have para cualquier guardarropa.`);
+    }, [tipo, marca, numero, tallas, color]);
+
+    useEffect(() => {
+        const cantidadArray = tallas.split(',').map(() => 1);
+        setCantidades(cantidadArray);
+    }, [tallas]);
+
+    const handleTipoChange = (e) => {
+        const selectedTipo = e.target.value;
+        setTipo(selectedTipo);
+
+        if (tiposCamisas.includes(selectedTipo)) {
+            setTallas('C,M,G');
+        } else if (tiposPantalones.includes(selectedTipo)) {
+            setTallas('30,32,34');
+        }
+    };
+
+    const handleTallasChange = (e) => {
+        setTallas(e.target.value);
+        const cantidadArray = e.target.value.split(',').map(() => 1);
+        setCantidades(cantidadArray);
+    };
+
+    const handleCantidadChange = (index, value) => {
+        const newCantidades = [...cantidades];
+        newCantidades[index] = value;
+        setCantidades(newCantidades);
+    };
+
+    const handleFileChange = (e) => {
+        if (e.target.files.length <= 3) {
+            const files = e.target.files;
+            const filePreviews = [];
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const preview = URL.createObjectURL(file);
+                filePreviews.push(preview);
+            }
+            setFotos(Array.from(files));
+            setPreviewFotos(filePreviews);
+        } else {
+            setPopupMensaje('Solo se pueden subir hasta 3 fotografías');
+            setPopupKey(prevKey => prevKey + 1);
+            e.target.value = null;
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let genero = nombre.includes('Dama') ? "Mujer" : "Hombre";
+        //si el precio de promocion es 0, se quita la promocion
+        if (promocion && precioPromocion === 0) {
+            setPromocion(false);
+            setPrecioPromocion(0);
+            mostrarNotificacion('El precio de promoción no puede ser 0, se ha quitado la promoción automáticamente');
+            return;
+        }
+
+        //el precio de promocion no puede ser mayor al precio normal
+        if (promocion && precioPromocion >= precio) {
+            mostrarNotificacion('El precio de promoción no puede ser mayor o igual al precio normal');
+            return;
+        }
+
+        if (!nombre || !precio || !descripcion || !tallas || !cantidades || !tipo || !genero || fotos.length === 0) {
+            mostrarNotificacion('Por favor, llena todos los campos');
+            return;
+        }
+
+
+        const formData = new FormData();
+        formData.append('nombre', nombre);
+        formData.append('precio', precio);
+        formData.append('descripcion', descripcion);
+        formData.append('tallas', tallas);
+        formData.append('cantidad', cantidades.join(','));
+        formData.append('promocion', promocion);
+        formData.append('precioPromocion', precioPromocion);
+        formData.append('tipo', tipo);
+        formData.append('genero', genero);
+        for (let i = 0; i < fotos.length; i++) {
+            formData.append('imagenes', fotos[i]);
+        }
+
+        try {
+            await CrearProducto(formData);
+            mostrarNotificacion('Producto creado exitosamente');
+            cerrar();
+        } catch (error) {
+            console.error('Error de red:', error);
+        }
+    };
+
+    const handleCerrarFormulario = () => {
+        cerrar();
+    };
+
+    return (
+        <div className='popup-overlay'>
+            <div className='producto-form-popup'>
+                <h1>Nuevo Producto</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className='form-group nombre'>
+                        <select
+                            value={tipo}
+                            onChange={handleTipoChange}
+                        >
+                            {tiposCamisas.map((tipo, index) => (
+                                <option key={index} value={tipo}>{tipo}</option>
+                            ))}
+                            {tiposPantalones.map((tipo, index) => (
+                                <option key={index} value={tipo}>{tipo}</option>
+                            ))}
+                        </select>
+                        <select
+                            value={marca}
+                            onChange={(e) => setMarca(e.target.value)}
+                        >
+                            {marcas.map((marca, index) => (
+                                <option key={index} value={marca}>{marca}</option>
+                            ))}
+                        </select>
+                        <input
+                            type='number'
+                            value={numero}
+                            onChange={(e) => setNumero(e.target.value)}
+                            placeholder='Número'
+                            required
+                            className='input-numero'
+                        />
+                        {/**select de los colores */}
+                        <select
+                            value={color}
+                            onChange={(e) => setColor(e.target.value)}
+                        >
+                            {colores.map((color, index) => (
+                                <option key={index} value={color}>{color}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className='form-group-inline'>
+                        <div className='form-group'>
+                            <label>Precio</label>
+                            <input
+                                type='number'
+                                value={precio}
+                                onChange={(e) => setPrecio(e.target.value)}
+                                placeholder='Precio'
+                                required
+                                className='input-numero'
+                            />
+                        </div>
+                        <div className='form-group'>
+                            <label>Promoción</label>
+                            <input
+                                type='checkbox'
+                                checked={promocion}
+                                onChange={(e) => setPromocion(e.target.checked)}
+                            />
+                        </div>
+                        {promocion && (
+                            <div className='form-group'>
+                                <label>Precio Promoción</label>
+                                <input
+                                    type='number'
+                                    value={precioPromocion}
+                                    onChange={(e) => setPrecioPromocion(e.target.value)}
+                                    placeholder='Precio de promoción'
+                                    className='input-numero'
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <div className='form-group'>
+                        <label>Tallas</label>
+                        <input
+                            type='text'
+                            value={tallas}
+                            placeholder='Tallas'
+                            onChange={handleTallasChange}
+                            required
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label>Cantidades</label>
+                        {cantidades.map((cantidad, index) => (
+                            <div key={index}>
+                                <label>{tallas.split(',')[index]}</label>
+                                <input
+                                    type='number'
+                                    value={cantidad}
+                                    onChange={(e) => handleCantidadChange(index, e.target.value)}
+                                    required
+                                    className='input-numero'
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    <div className='form-group-img'>
+                        <label>Fotografías (máximo 3)</label>
+                        {previewFotos.length > 0 && (
+                            <div className='fotos-preview'>
+                                {previewFotos.map((foto, index) => (
+                                    <img
+                                        key={index}
+                                        src={foto}
+                                        alt={`Foto ${index + 1}`}
+                                        className='foto-preview'
+                                    />
+                                ))}
+                            </div>
+                        )}
+                        <label className='custom-file-upload'>
+                            <input
+                                type='file'
+                                multiple
+                                accept='image/*'
+                                onChange={handleFileChange}
+                            />
+                            Seleccionar fotos
+                            <img className='icono-imagen' src={imagen} alt='icono' />
+                        </label>
+                    </div>
+                    <div className='form-actions'>
+                        <button className='boton-secundario' type='button' onClick={handleCerrarFormulario}>
+                            Cancelar
+                        </button>
+                        <button className='boton-primario' type='submit'>
+                            Crear Producto
+                        </button>
+                    </div>
+                </form>
+            </div>
+            {notificacion && (
+                <Notificacion mensaje={notificacion} onClose={() => setNotificacion(null)} />
+            )}
+        </div>
+    );
+};
+
+export default NuevoProducto;

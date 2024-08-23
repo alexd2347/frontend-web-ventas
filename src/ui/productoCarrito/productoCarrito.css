@@ -1,0 +1,123 @@
+.carrito-producto-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid var(--claro);
+    width: 1000px;
+    max-width: calc(95% - 40px);
+    margin: 0;
+    padding: 0px 20px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    transition: .3s ease-in-out;
+}
+
+.carrito-producto-container:hover {
+    border-color: var(--secundario);
+}
+
+.carrito-producto-imagen {
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.carrito-producto-imagen:hover {
+    filter: saturate(2);
+}
+
+.carrito-producto-nombre {
+    color: var(--gris);
+    font-size: 18px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    text-wrap: wrap;
+    width: 200px;
+    max-width: 50%;
+}
+
+.carrito-producto-precio,
+.carrito-producto-talla,
+.carrito-producto-cantidad {
+    font-size: 16px;
+    text-align: center;
+    margin: 0 10px;
+    text-wrap: nowrap;
+}
+
+.carrito-producto-talla,
+.carrito-producto-cantidad {
+    color: var(--gris);
+}
+
+.carrito-producto-precio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: auto;
+    background-color: var(--secundario);
+    color: var(--blanco);
+    gap: 5px;
+}
+
+.carrito-cuadrito-promocion {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--red);
+    color: var(--blanco);
+    padding: 6px 12px;
+    border-radius: 0 0 8px 0 ;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.carrito-producto-info{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .carrito-producto-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        gap: 0;
+    }
+    .carrito-producto-imagen {
+        height: 150px;
+        width: 100px;
+        margin: 0;
+    }
+    .carrito-producto-nombre {
+        font-size: 16px;
+    }
+
+    .carrito-producto-precio {
+        font-size: 14px;
+    }
+
+    .carrito-producto-talla,
+    .carrito-producto-cantidad {
+        font-size: 14px;
+    }
+    .carrito-producto-info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 10px 0;
+    }
+}

@@ -1,5 +1,5 @@
 :root {
-  --primario: #ae00ff;
+  --primario: #952bff;
   --gris: rgb(118, 124, 147);
   --secundario: #b29fff;
   --claro: rgb(226, 226, 226);
@@ -40,8 +40,8 @@
   position: fixed;
   bottom: 20px;
   left: 20px;
-  width: 4rem;
-  height: 4rem;
+  width: 60px;
+  height: 60px;
   background-color: #25D366;
   border-radius: 5rem 5rem 5rem 1rem;
   display: flex;
@@ -50,6 +50,14 @@
   z-index: 1000;
   animation: float 2s infinite ease-in-out;
   transition: transform 0.3s;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .whatsapp {
+    bottom: 40px;
+    right: 20px;
+    left: auto;
+  }
 }
 
 .whatsapp:hover {
@@ -106,15 +114,18 @@
 
 /*-------------BOTONES-------------*/
 .boton-primario {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   background-color: var(--primario);
   color: var(--blanco);
-  border-radius: 8px;
   font-size: 14px;
   padding: 10px 16px;
   outline: none;
   border: none;
-  border: 2px solid var(--negro);
+  border: 2px solid var(--primario);
   transition: .3s ease-in-out;
 }
 
@@ -123,21 +134,23 @@
 }
 
 .boton-secundario {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   background-color: var(--blanco);
-  color: var(--gris);
-  border-radius: 8px;
+  color: var(--secundario);
   font-size: 14px;
   padding: 10px 16px;
   outline: none;
   border: none;
-  border: 2px solid var(--gris);
+  border: 2px solid var(--secundario);
   transition: .3s ease-in-out;
 }
 
 .boton-secundario:hover {
-  border-color: var(--negro);
-  color: var(--negro);
+  filter: saturate(3);
 }
 
 
@@ -145,11 +158,13 @@
 
 .input-text {
   outline: none;
+  border: none;
+  background-color: transparent;
   width: calc(100% - 32px);
   margin: 4px 0px;
   padding: 10px 16px;
-  border: 1px solid var(--claro);
-  border-radius: 8px;
+  border-bottom: 2px solid var(--claro);
+  color: var(--blanco);
   font-size: 16px;
   transition: .3s ease-in-out;
 }
@@ -186,9 +201,19 @@
 .gap-10px {
   gap: 10px;
 }
+
 .flex-wrap-true {
   flex-wrap: wrap;
 }
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.pading-top-bottom-10px {
+  padding: 10px 0;
+}
+
 
 .contenedor-horizontal {
   width: 100%;
@@ -197,6 +222,23 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.contenedor-horizontal-auto {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-horizontal-extendido {
+  width: 100%;
+  max-width: 95%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .contenedor-horizontal-arriba-centro {
@@ -208,9 +250,27 @@
   justify-content: center;
 }
 
+.contenedor-horizontal-derecha {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .contenedor-vertical {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-vertical-auto {
+  height: auto;
+  width: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -224,4 +284,156 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+}
+
+.contenedor-vertical-arriba-centro {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/*-----------------PAGINATION CSS-----------------*/
+
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  padding-bottom: .3rem;
+}
+
+.pagination-button {
+  padding: 0 1.2rem;
+  font-size: .8rem;
+  cursor: pointer;
+  background-color: var(--primario);
+  color: var(--blanco);
+  border: none;
+  outline: none;
+  border: 2px solid var(--primario);
+  white-space: nowrap;
+  transition: .3s ease-in-out;
+  box-sizing: border-box;
+  height: 2.2rem;
+}
+
+.pagination-button:hover {
+  filter: saturate(2);
+}
+
+.pagination-button:disabled {
+  background-color: var(--secundario);
+  color: var(--blanco);
+  cursor: not-allowed;
+  border: 2px solid var(--secundario);
+  box-sizing: border-box;
+}
+
+.pagination-info {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--negro);
+  margin: .5rem 1rem;
+  white-space: nowrap;
+}
+
+/*-----------------TABLA CSS-----------------*/
+.contenedor-tabla {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0;
+  background-color: var(--claro);
+  padding: 0rem;
+  margin-bottom: .5rem;
+  width: 1200px;
+  max-width: 90%;
+  overflow: auto;
+  box-sizing: border-box;
+  border: 8px solid var(--claro);
+}
+
+.contenedor-tabla::-webkit-scrollbar {
+  height: .8rem;
+  width: .8rem;
+  background-color: transparent;
+}
+
+.contenedor-tabla::-webkit-scrollbar-thumb {
+  height: .8rem;
+  width: .8rem;
+  background-color: var(--gris);
+  border-radius: 1rem;
+}
+
+table {
+  width: 100%;
+  background-color: var(--gris);
+  border-collapse: collapse;
+  border-radius: .5rem;
+  margin-bottom: .5rem;
+}
+
+thead th {
+  height: 60px;
+  color: var(--blanco);
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: var(--negro);
+}
+
+tbody td {
+  height: 60px;
+  color: var(--negro);
+  text-align: center;
+  font-weight: 400;
+  font-size: .9rem;
+  box-sizing: border-box;
+  min-width: 6rem;
+}
+
+tbody tr {
+  background-color: var(--blanco);
+  transition: background-color .5s ease-in-out;
+}
+
+tbody tr:hover {
+  background-color: var(--secundario);
+}
+
+tbody tr:hover td {
+  color: var(--blanco);
+}
+
+tbody tr:hover .table-nombre {
+  color: var(--secundario);
+}
+
+.table-nombre {
+  font-weight: 600;
+  text-align: left;
+  padding-left: 1rem;
+  min-width: 13rem;
+  position: sticky;
+  left: 0;
+}
+
+.table-dato-small {
+  min-width: 7rem;
+}
+
+.table-dato-medium {
+  min-width: 10rem;
+}
+
+.table-dato-large {
+  min-width: 15rem;
 }

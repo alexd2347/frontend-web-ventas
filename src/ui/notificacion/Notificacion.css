@@ -1,0 +1,36 @@
+.notificacion {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    background-color: var(--primario);
+    color: var(--blanco);
+    padding: 20px;
+    border-radius: 0;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(100%);
+    border: 2px solid var(--blanco);
+    animation: slideInOut 3s ease-in-out forwards;
+}
+
+@keyframes slideInOut {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    90% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}

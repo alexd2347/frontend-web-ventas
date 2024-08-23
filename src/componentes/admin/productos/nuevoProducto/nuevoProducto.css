@@ -1,0 +1,279 @@
+/* Overlay que cubre toda la pantalla */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+    /* Evita el desbordamiento del overlay */
+}
+
+/* Popup para el formulario */
+.producto-form-popup {
+    background-color: var(--blanco);
+    padding: 20px 50px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    position: relative;
+    overflow-y: auto;
+    max-height: 80vh;
+    box-sizing: border-box;
+    /* Incluye padding y border en el width y height */
+}
+
+/* Estilo de la barra de desplazamiento personalizada */
+.producto-form-popup::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--claro);
+}
+
+.producto-form-popup::-webkit-scrollbar-thumb {
+    background-color: var(--negro);
+    border-radius: 10px;
+}
+
+/* Estilo del título del formulario */
+.producto-form-popup h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+.nombre {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* Estilo de los grupos de formulario */
+.form-group {
+    margin-bottom: 40px;
+    box-sizing: border-box;
+    /* Asegura que el padding no cause desbordamiento */
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: var(--negro);
+}
+
+.form-group div {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group div label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.form-group div label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    padding: 8px 16px;
+}
+
+.form-group div label:hover {
+    background-color: var(--claro);
+}
+
+.form-group div label input[type="radio"]:checked+span {
+    padding: 8px 16px;
+    background-color: var(--primario);
+    color: var(--blanco);
+}
+
+.form-group div label span {
+    margin-left: 0;
+    padding: 8px 16px;
+}
+
+.form-group div label input[type="radio"]:checked+span {
+    font-weight: bold;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 2px solid var(--gris);
+    box-sizing: border-box;
+    /* Incluye padding y border en el width */
+}
+
+.form-group input:focus {
+    border-bottom: 2px solid var(--primario);
+}
+
+.input-cantidad {
+    outline: none;
+    border: none;
+    width: 30% !important;
+    padding: 10px;
+    border-bottom: 2px solid var(--gris);
+    box-sizing: border-box;
+    /* Incluye padding y border en el width */
+}
+
+/* Estilo del botón de archivo personalizado */
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: var(--secundario);
+    color: var(--blanco);
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Estilo del icono de imagen */
+.icono-imagen {
+    width: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Estilo para la previsualización de fotos */
+.fotos-preview {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permite que las fotos se ajusten en varias líneas */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.foto-preview {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Estilo de las acciones del formulario */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    background-color: var(--blanco);
+    padding: 10px 20px;
+    width: calc(100% - 40px);
+    border: 2px solid var(--claro);
+}
+
+.form-group-inline {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    /* Alinea verticalmente los elementos */
+    margin-bottom: 15px;
+}
+
+.form-group-inline .form-group {
+    flex: 1;
+    /* Hace que cada form-group ocupe el mismo ancho */
+}
+
+.form-group-inline .form-group label {
+    display: block;
+    font-weight: bold;
+    color: var(--negro);
+    margin-bottom: 5px;
+}
+
+.input-numero {
+    width: 50% !important;
+    padding: 10px;
+    border: 1px solid var(--claro);
+    box-sizing: border-box;
+}
+
+.form-group-inline .form-group input[type="checkbox"] {
+    width: auto;
+    /* Hace que el checkbox tenga el tamaño adecuado */
+    margin-left: 10px;
+    margin-top: 5px;
+    transform: scale(1.5);
+    /* Escala el tamaño del checkbox para mejor visibilidad */
+}
+
+.form-group-img {
+    margin-bottom: 50px;
+}
+
+/* Estilo de la etiqueta del grupo de formulario */
+.form-group-img label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--negro);
+}
+
+/* Estilo de la vista previa de fotos */
+.fotos-preview {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    /* Permite que las imágenes se ajusten en múltiples líneas si es necesario */
+}
+
+.foto-preview {
+    width: 120px;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 5px;
+    border: 2px solid var(--claro);
+}
+
+/* Estilo del botón de selección de archivos */
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--secundario);
+    color: var(--blanco) !important;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid var(--secundario);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: var(--primario);
+    border-color: var(--primario);
+}
+
+/* Estilo del ícono de imagen dentro del botón */
+.icono-imagen {
+    width: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Estilo del input tipo file para ocultarlo */
+.custom-file-upload input[type='file'] {
+    display: none;
+}

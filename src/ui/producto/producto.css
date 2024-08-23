@@ -44,8 +44,11 @@
 }
 
 .imagen-pequena {
+    width: 120px;
+    height: 150px;
     cursor: pointer;
-    width: 100%;
+    object-fit: contain;
+    object-position: center;
     outline: 2px solid transparent;
     background-color: var(--blanco);
     transition: 0.3s ease-in-out;
@@ -57,10 +60,9 @@
 
 
 .imagen-principal {
-    max-width: calc(75% - 10px);
-    width: 500px;
-    height: auto;
-    object-fit: cover;
+    width: 450px;
+    height: 550px;
+    object-fit: contain;
     object-position: center;
     background-color: var(--blanco);
     transition: .3s ease-in-out;
@@ -68,6 +70,47 @@
 
 .imagen-principal:hover {
     transform: scale(1.02);
+    filter: saturate(1.2);
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .producto-imagenes-contenedor {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        width: 100%;
+        height: auto;
+    }
+
+    .producto-imagenes-peque-contenedor {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 98%;
+        max-width: 95%;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .imagen-pequena {
+        width: 33%;
+        height: 130px;
+    }
+
+    .imagen-principal {
+        width: 98%;
+        height: 350px;
+        object-fit: contain;
+        object-position: center;
+        background-color: var(--blanco);
+        transition: .3s ease-in-out;
+        margin-bottom: 10px;
+    }
 }
 
 .producto-descripcion-contenedor {
@@ -77,22 +120,35 @@
     align-items: flex-start;
     width: 600px;
     max-width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-.producto-nombre {
-    font-size: 28px;
+.producto-nombre-desc {
+    font-size: 36px;
+    color: var(--gris);
+    margin: 0;
+    margin-top: 20px;
+}
+
+.precio-promocion-desc {
+    font-size: 18px;
+    color: var(--red);
+    text-decoration: line-through;
     font-weight: bold;
-    color: var(--negro);
 }
 
-.producto-precio {
-    font-size: 20px;
-    color: var(--primario);
+.precio-desc {
+    font-size: 26px;
+    color: var(--secundario);
+    font-weight: bold;
 }
 
 .producto-descripcion {
     font-size: 16px;
     color: var(--gris);
+    padding: 0;
+    text-align: left;
 }
 
 .tallas {
@@ -102,6 +158,8 @@
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+    margin-top: 20px;
+    margin-left: 5px;
 }
 
 .talla {
@@ -119,6 +177,47 @@
 
 .talla-seleccionada {
     background-color: var(--secundario);
-    color: white;
+    color: var(--blanco);
     outline: 2px solid var(--secundario);
+}
+
+.talla-seleccionada:hover {
+    filter: saturate(3);
+}
+
+.icono-carrito {
+    width: 20px;
+    filter: invert(1);
+    margin-right: 10px;
+}
+
+.cantidad {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.boton-cantidad {
+    background-color: var(--secundario);
+    color: var(--blanco);
+    width: 30px;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 5px;
+    transition: 0.3s ease-in-out;
+}
+
+.boton-cantidad:hover {
+    filter: saturate(3);
+}
+
+.cantidad-numero {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 10px;
 }
