@@ -26,11 +26,21 @@ const Producto = () => {
         const fetchProducto = async () => {
             const producto = await ObtenerProductoPorId(id);
             setProducto(producto);
-            setImagenPrincipal(producto.imagenes.split(',')[0]); // Establece la primera imagen como la imagen principal por defecto
-            setTallaSeleccionada(producto.tallas.split(',')[0]); // Establece la primera talla como la talla seleccionada por defecto
+            setImagenPrincipal(producto.imagenes.split(',')[0]);
+            setTallaSeleccionada(producto.tallas.split(',')[0]);
         };
         fetchProducto();
     }, [id]);
+
+    useEffect(() => {
+        // Verifica si la talla seleccionada tiene stock
+        const stock = producto ? producto.cantidad.split(',')[producto.tallas.split(',').indexOf(tallaSeleccionada)] : 0;
+        if (stock === "0") {
+            setCantidad(0);
+        } else if (cantidad === 0) {
+            setCantidad(1); // Restablecer a 1 si había sido 0 anteriormente.
+        }
+    }, [tallaSeleccionada, producto]);
 
     const handleImagenClick = (imagen) => {
         setImagenPrincipal(imagen);
@@ -38,31 +48,25 @@ const Producto = () => {
 
     const handleTallaClick = (talla) => {
         setTallaSeleccionada(talla);
-        //reinicio la cantidad a 1
-        setCantidad(1);
+        setCantidad(1); // Reinicia la cantidad a 1
     };
 
     const handleDisminuirCantidad = () => {
-        //disminuir la cantidad de productos
-        //minimo 1
         if (cantidad === 1) return;
         setCantidad(cantidad - 1);
-    }
+    };
+
     const handleAUmentarCantidad = () => {
-        //aumentar la cantidad de productos
-        //maximo el stock de la talla seleccionada
         const stock = producto.cantidad.split(',')[producto.tallas.split(',').indexOf(tallaSeleccionada)];
         if (cantidad == stock) return;
         setCantidad(cantidad + 1);
-    }
+    };
 
     const handleAgregarAlCarrito = () => {
-        //mandar el id del producto y la talla seleccionada junto con la cantidad al carrito
-        //genera un uuid para el producto
         const uuid = Math.random().toString(36).substring(2) + Date.now().toString(36);
         agregarProducto({ id: uuid, id_producto: producto.id, talla: tallaSeleccionada, cantidad });
         mostrarNotificacion('Producto agregado al carrito');
-    }
+    };
 
     return (
         <div className='content'>
@@ -98,7 +102,6 @@ const Producto = () => {
                         <p className='producto-descripcion'>{producto.descripcion}</p>
                         <div className='separador' />
                         <div className='tallas'>
-                            {/* Mostrar las tallas, separadas por "," y ponerlas en un cuadrito bonito */}
                             {producto.tallas.split(',').map((talla, index) => (
                                 <div
                                     key={index}
@@ -110,19 +113,20 @@ const Producto = () => {
                             ))}
                         </div>
                         <p>Stock: {producto.cantidad.split(',')[producto.tallas.split(',').indexOf(tallaSeleccionada)]}</p>
-                        {/* cantidad aumentar o disminuri con botones mas o menos*/}
                         <div className='cantidad'>
-                            <button className='boton-cantidad' onClick={handleDisminuirCantidad}>-</button>
+                            <button className='boton-cantidad' onClick={handleDisminuirCantidad} disabled={cantidad === 0}>-</button>
                             <span className='cantidad-numero'>{cantidad}</span>
-                            <button className='boton-cantidad' onClick={handleAUmentarCantidad}>+</button>
+                            <button className='boton-cantidad' onClick={handleAUmentarCantidad} disabled={cantidad === 0}>+</button>
                         </div>
-                        {/** Agregar un botón para agregar al carrito */}
-                        <button className='boton-primario' onClick={handleAgregarAlCarrito}>
+                        <button 
+                            className='boton-primario' 
+                            onClick={handleAgregarAlCarrito} 
+                            disabled={cantidad === 0}
+                        >
                             <img src={Carrito} alt='Carrito de compras' className='icono-carrito' />
                             Agregar al carrito
                         </button>
                         {producto.promocion && <p>¡En promoción!</p>}
-
                     </div>
                 </div>
             ) : (

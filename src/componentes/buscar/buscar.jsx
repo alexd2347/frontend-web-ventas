@@ -152,7 +152,15 @@ const Buscar = () => {
                     <label>
                         <input
                             type="checkbox"
-                            value="C"
+                            value="XS"
+                            onChange={handleTallaChange}
+                        />
+                        Extra chica
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            value="S"
                             onChange={handleTallaChange}
                         />
                         Chica
@@ -168,37 +176,26 @@ const Buscar = () => {
                     <label>
                         <input
                             type="checkbox"
-                            value="G"
+                            value="L"
                             onChange={handleTallaChange}
                         />
                         Grande
                     </label>
-                </div>
-                <div className='filtro-container'>
-                    <div className='filtro-titulo'>Cintura</div>
                     <label>
                         <input
                             type="checkbox"
-                            value="30"
+                            value="XL"
                             onChange={handleTallaChange}
                         />
-                        30
+                        Extra grande
                     </label>
                     <label>
                         <input
                             type="checkbox"
-                            value="32"
+                            value="XXL"
                             onChange={handleTallaChange}
                         />
-                        32
-                    </label>
-                    <label>
-                        <input
-                            type="checkbox"
-                            value="34"
-                            onChange={handleTallaChange}
-                        />
-                        34
+                        Doble extra grande
                     </label>
                 </div>
                 <div className='separador' />

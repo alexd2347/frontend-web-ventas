@@ -5,7 +5,6 @@ export const ObtenerProductos = async () => {
     try {
         const response = await fetch(URL);
         const data = await response.json();
-        data.sort(() => Math.random() - 0.5);
         return data;
     } catch (error) {
         console.error(error);
@@ -67,6 +66,22 @@ export const EliminarProducto = async (id) => {
         if (!response.ok) {
             throw new Error('Error en la respuesta de la red');
         }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+export const UpdateProducto = async (id, producto) => {
+    try {
+        const response = await fetch(`${URL}/${id}`, {
+            method: 'PUT',
+            body: producto,
+        });
+        if (!response.ok) {
+            throw new Error('Error en la respuesta de la red');
+        }
+        return response.json();
     } catch (error) {
         console.error(error);
     }

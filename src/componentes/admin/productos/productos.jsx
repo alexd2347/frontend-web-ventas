@@ -15,7 +15,7 @@ const Productos = () => {
 
     //------------------------------paginados tabla-------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const resultsPerPage = 5;
+    const resultsPerPage = 10;
     const indexOfLastResult = currentPage * resultsPerPage;
     const indexOfFirstResult = indexOfLastResult - resultsPerPage;
     let currentResults = productos.slice(indexOfFirstResult, indexOfLastResult);
@@ -29,6 +29,7 @@ const Productos = () => {
 
     useEffect(() => {
         const fetchProductos = async () => {
+            setCurrentPage(1);
             setLoading(true);
             const data = await ObtenerProductos();
             setProductos(data);
@@ -107,9 +108,11 @@ const Productos = () => {
                                     <td>{producto.precio}</td>
                                     <td>{producto.tallas}</td>
                                     <td>{producto.cantidad}</td>
-                                    <td className='contenedor-horizontal-centrado'>
-                                        <button className='boton-secundario' onClick={(e) => handleEliminarProducto(producto.id)}>Eliminar</button>
-                                        <button className='boton-secundario' onClick={(e) => handleShowFormActualizarProducto(producto.id)}>Actualizar</button>
+                                    <td>
+                                        <div className='contenedor-horizontal gap-10px'>
+                                            <button className='boton-secundario' onClick={(e) => handleEliminarProducto(producto.id)}>Eliminar</button>
+                                            <button className='boton-primario' onClick={(e) => handleShowFormActualizarProducto(producto.id)}>Actualizar</button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}

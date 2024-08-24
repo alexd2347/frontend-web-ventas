@@ -25,7 +25,7 @@ import './App.css'
 import whattsapp from './assets/whatsapp.webp';
 
 function App() {
-  const version = '1.0.1';
+  const version = '1.1.17';
   //guardar en el local storage los modulos que tiene el usuario solo tiene inicio
   localStorage.setItem('modulos', 'promociones,nuevo');
 

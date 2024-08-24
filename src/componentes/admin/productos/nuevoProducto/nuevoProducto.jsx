@@ -144,22 +144,27 @@ const NuevoProducto = ({ cerrar }) => {
     };
 
     const handleFileChange = (e) => {
-        if (e.target.files.length <= 3) {
-            const files = e.target.files;
+        const newFiles = e.target.files;
+        const totalFiles = Array.from(fotos).concat(Array.from(newFiles));
+
+        if (totalFiles.length <= 3) {
             const filePreviews = [];
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
+            const filesToShow = totalFiles.slice(0, 3); // Limitar a 3 fotos
+
+            for (let i = 0; i < filesToShow.length; i++) {
+                const file = filesToShow[i];
                 const preview = URL.createObjectURL(file);
                 filePreviews.push(preview);
             }
-            setFotos(Array.from(files));
+
+            setFotos(filesToShow);
             setPreviewFotos(filePreviews);
         } else {
-            setPopupMensaje('Solo se pueden subir hasta 3 fotografías');
-            setPopupKey(prevKey => prevKey + 1);
+            mostrarNotificacion('Solo puedes subir hasta 3 fotos');
             e.target.value = null;
         }
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -197,7 +202,10 @@ const NuevoProducto = ({ cerrar }) => {
         for (let i = 0; i < fotos.length; i++) {
             formData.append('imagenes', fotos[i]);
         }
-
+        //poner en consolo.log el formData
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
         try {
             await CrearProducto(formData);
             mostrarNotificacion('Producto creado exitosamente');

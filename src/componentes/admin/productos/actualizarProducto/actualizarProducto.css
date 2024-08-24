@@ -1,0 +1,33 @@
+.fotos-preview-actualizar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.foto-container-actualizar  {
+    position: relative;
+}
+
+.foto-preview-actualizar  {
+    width: 100px;
+    height: 120px;
+    display: block;
+    object-fit: cover;
+    border: 1px solid var(--claro);
+}
+
+.delete-button-actualizar  {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--red);
+    color: var(--blanco);
+    border: none;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.delete-button-actualizar:hover {
+    filter: saturate(2);
+}
