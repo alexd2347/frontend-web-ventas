@@ -8,8 +8,8 @@ const NuevoProducto = ({ cerrar }) => {
     const marcas = [
         'Abercrombie',
         'Abercrombie Dama',
-        'Amini',
-        'Amini Dama',
+        'Amiri',
+        'Amiri Dama',
         'Armani',
         'Armani Dama',
         'Burberry',

@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { ObtenerProductos, EliminarProducto } from '../../../services/productos';
 import Loader from '../../../ui/loader/loader';
 import NuevoProducto from './nuevoProducto/nuevoProducto';
+import ActualizarProducto from './actualizarProducto/actualizarProducto';
 import './productos.css';
 
 const Productos = () => {
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
+    const [showFormActualizarProducto, setShowFormActualizarProducto] = useState(false);
+    const [idProductoActualizar, setIdProductoActualizar] = useState(null);
+
 
     //------------------------------paginados tabla-------------------------------
     const [currentPage, setCurrentPage] = useState(1);
@@ -46,6 +50,16 @@ const Productos = () => {
     const cerrarFormulario = () => {
         setShowForm(false);
     }
+    const handleShowFormActualizarProducto = (id) => {
+        setIdProductoActualizar(id);
+        setShowFormActualizarProducto(true);
+    }
+
+    const cerrarFormActualizarProducto = () => {
+        setShowFormActualizarProducto(false);
+    }
+
+
 
     const handleEliminarProducto = async (id) => {
         const confirmar = window.confirm('¿Estás seguro de eliminar este producto?');
@@ -61,6 +75,7 @@ const Productos = () => {
             <button className='boton-primario' onClick={handleShowForm}>
                 Añadir nuevo producto
             </button>
+
             {loading ? (
                 <Loader />
             ) : (
@@ -94,6 +109,7 @@ const Productos = () => {
                                     <td>{producto.cantidad}</td>
                                     <td className='contenedor-horizontal-centrado'>
                                         <button className='boton-secundario' onClick={(e) => handleEliminarProducto(producto.id)}>Eliminar</button>
+                                        <button className='boton-secundario' onClick={(e) => handleShowFormActualizarProducto(producto.id)}>Actualizar</button>
                                     </td>
                                 </tr>
                             ))}
@@ -120,6 +136,7 @@ const Productos = () => {
                     </div>
                 </div>
             )}
+            {showFormActualizarProducto && <ActualizarProducto cerrar={cerrarFormActualizarProducto} id={idProductoActualizar} />}
             {showForm && <NuevoProducto cerrar={cerrarFormulario} />}
         </div>
     );
