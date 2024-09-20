@@ -65,11 +65,16 @@ const Producto = () => {
     };
 
     const handleAgregarAlCarrito = () => {
+<<<<<<< HEAD
         if (!userLogged) {
             mostrarNotificacion('Debes iniciar sesión para agregar productos al carrito');
             return;
         }
         agregarProducto({ idProducto: producto.id, talla: tallaSeleccionada, cantidad });
+=======
+        const uuid = Math.random().toString(36).substring(2) + Date.now().toString(36);
+        agregarProducto({ id: uuid, id_producto: producto.id, talla: tallaSeleccionada, cantidad });
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
         mostrarNotificacion('Producto agregado al carrito');
     };
 

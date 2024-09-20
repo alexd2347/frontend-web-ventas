@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { ObtenerProductoPorId, UpdateProducto } from "../../../../services/productos";
+<<<<<<< HEAD
 import { useProductosData } from '../../../../productosDataContext'; 
+=======
+
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
 import imagen from '../../../../assets/imagen.webp';
 import Notificacion from '../../../../ui/notificacion/Notificacion';
 import './actualizarProducto.css';
 
 const ActualizarProducto = ({ cerrar, id }) => {
+<<<<<<< HEAD
     const { marcas, tiposCamisas, tiposPantalones, colores } = useProductosData();
     const [notificacion, setNotificacion] = useState(null);
     const mostrarNotificacion = (mensaje) => {
@@ -48,6 +53,64 @@ const ActualizarProducto = ({ cerrar, id }) => {
             setPreviewFotos(previewUrls);
 
 
+=======
+    const marcas = [
+        'Abercrombie', 'Abercrombie Dama', 'Amiri', 'Amiri Dama', 'Armani', 'Armani Dama', 'Burberry', 'Burberry Dama',
+        'Calvin Klein', 'Calvin Klein Dama', 'Coach', 'Coach Dama', 'Expres', 'Expres Dama', 'Gucci', 'Gucci Dama',
+        'Guess', 'Guess Dama', 'Hugo Boss', 'Hugo Boss Dama', 'Karl Lagerfeld', 'Karl Lagerfeld Dama', 'Kit', 'Kit Dama',
+        'Lacoste', 'Lacoste Dama', 'Louis Vuitton', 'Louis Vuitton Dama', 'Michael Kors', 'Michael Kors Dama', 'Nautica',
+        'Nautica Dama', 'Palm Angels', 'Palm Angels Dama', 'Penguin', 'Penguin Dama', 'Psycho Bunny', 'Psycho Bunny Dama',
+        'Ralph Lauren', 'Ralph Lauren Dama', 'Tommy', 'Tommy Dama'
+    ];
+
+    const tiposCamisas = [
+        'Camisa', 'Playera', 'Blusa', 'Sudadera', 'Sweater', 'Playera Cuello Polo', 'Playera Manga Larga'
+    ];
+
+    const tiposPantalones = [
+        'Pantalón', 'Jogger', 'Shorts'
+    ];
+
+    const colores = [
+        'Amarillo', 'Azul', 'Beige', 'Blanco', 'Celeste', 'Gris', 'Lila', 'Cafe', 'Morado', 'Naranja', 'Negro', 'Rosa',
+        'Rojo', 'Turquesa', 'Vino', 'Verde'
+    ];
+
+
+    const [notificacion, setNotificacion] = useState(null);
+    const mostrarNotificacion = (mensaje) => {
+        setNotificacion(mensaje);
+        setTimeout(() => {
+            setNotificacion(null);
+        }, 3000);
+    };
+
+    const [nombre, setNombre] = useState('');
+    const [tipo, setTipo] = useState('Camisa');
+    const [marca, setMarca] = useState('Tommy');
+    const [numero, setNumero] = useState(1);
+    const [color, setColor] = useState('Negro');
+    const [descripcion, setDescripcion] = useState('');
+    const [precio, setPrecio] = useState(0);
+    const [tallas, setTallas] = useState('C,M,G');
+    const [cantidades, setCantidades] = useState([]);
+    const [promocion, setPromocion] = useState(false);
+    const [precioPromocion, setPrecioPromocion] = useState(0);
+    const [fotos, setFotos] = useState([]);
+    const [previewFotos, setPreviewFotos] = useState([]);
+
+    useEffect(() => {
+        const fetchProductoPorId = async () => {
+            const producto = await ObtenerProductoPorId(id);
+            // Actualizar el estado con los datos obtenidos
+            setNombre(producto.nombre);
+            setDescripcion(producto.descripcion);
+            setPrecio(Number(producto.precio));
+            setTallas(producto.tallas);
+            setCantidades(producto.cantidad.split(','));
+            setPromocion(producto.promocion);
+            setPrecioPromocion(Number(producto.precioPromocion));
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
             //NUMERO SE OBTENDRA DE producto.nombre y es el numero que encuentre
             const numeroProducto = producto.nombre.match(/\d+/g);
             setNumero(numeroProducto ? numeroProducto[0] : 1);
@@ -81,6 +144,7 @@ const ActualizarProducto = ({ cerrar, id }) => {
         }
     };
 
+<<<<<<< HEAD
     useEffect(() => {
         const tallasArray = tallas.split(',');
         const nuevasCantidades = tallasArray.map((talla, index) => {
@@ -103,6 +167,14 @@ const ActualizarProducto = ({ cerrar, id }) => {
     };
 
 
+=======
+    const handleTallasChange = (e) => {
+        setTallas(e.target.value);
+        const cantidadArray = e.target.value.split(',').map(() => 1);
+        setCantidades(cantidadArray);
+    };
+    
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
 
     const handleCantidadChange = (index, value) => {
         const newCantidades = [...cantidades];
@@ -156,7 +228,11 @@ const ActualizarProducto = ({ cerrar, id }) => {
 
 
 
+<<<<<<< HEAD
         if (!nombre || !precio || !descripcion || !tallas || !cantidades || !tipo || !genero) {
+=======
+        if (!nombre || !precio || !descripcion || !tallas || !cantidades || !tipo || !genero || fotos.length === 0) {
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
             mostrarNotificacion('Por favor, llena todos los campos');
             return;
         }
@@ -173,6 +249,7 @@ const ActualizarProducto = ({ cerrar, id }) => {
         formData.append('precioPromocion', precioPromocion);
         formData.append('tipo', tipo);
         formData.append('genero', genero);
+<<<<<<< HEAD
         console.log(fotos.length);
         if (fotos.length === 0) {
             console.log('no entro');
@@ -189,6 +266,10 @@ const ActualizarProducto = ({ cerrar, id }) => {
         //poner en consolo.log el formData
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
+=======
+        for (let i = 0; i < fotos.length; i++) {
+            formData.append('imagenes', fotos[i]);
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
         }
 
         try {
@@ -201,6 +282,7 @@ const ActualizarProducto = ({ cerrar, id }) => {
         }
     };
 
+<<<<<<< HEAD
     const handleBorrarFoto = (index) => (e) => {
         e.preventDefault(); // Esto previene que el botón cause un comportamiento no deseado
         const newFotos = Array.from(fotos);
@@ -213,6 +295,8 @@ const ActualizarProducto = ({ cerrar, id }) => {
         setPreviewFotos(newPreviewFotos);
     }
 
+=======
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
     return (
         <div className='popup-overlay'>
             <div className='producto-form-popup'>
@@ -321,6 +405,7 @@ const ActualizarProducto = ({ cerrar, id }) => {
                         {previewFotos.length > 0 && (
                             <div className='fotos-preview'>
                                 {previewFotos.map((foto, index) => (
+<<<<<<< HEAD
                                     <div className="contenedor-foto">
                                         <img
                                             key={index}
@@ -330,6 +415,14 @@ const ActualizarProducto = ({ cerrar, id }) => {
                                         />
                                         <button className='boton-X' onClick={handleBorrarFoto(index)}>X</button>
                                     </div>
+=======
+                                    <img
+                                        key={index}
+                                        src={foto}
+                                        alt={`Foto ${index + 1}`}
+                                        className='foto-preview'
+                                    />
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
                                 ))}
                             </div>
                         )}

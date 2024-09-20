@@ -207,7 +207,11 @@
   background-color: var(--secundario);
   color: var(--blanco);
   cursor: not-allowed;
+<<<<<<< HEAD
   outline: 2px solid var(--blanco);
+=======
+  border: 2px solid var(--blanco);
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
 }
 
 .boton-secundario:hover {

@@ -31,8 +31,14 @@ const Productos = () => {
         setCurrentPage(currentPage - 1);
     };
 
+<<<<<<< HEAD
     const fetchDataDebounced = useDebouncedCallback(
         async (buscar) => {
+=======
+    useEffect(() => {
+        const fetchProductos = async () => {
+            setCurrentPage(1);
+>>>>>>> 32f9e800ac5f93d615887960a8f6613e66fc4efa
             setLoading(true);
             setCurrentPage(1);
             let data = await ObtenerProductos();
