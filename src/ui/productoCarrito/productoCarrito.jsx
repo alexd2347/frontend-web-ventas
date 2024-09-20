@@ -9,7 +9,8 @@ const ProductoCarrito = ({ producto }) => {
     const [total, setTotal] = useState(0);
     useEffect(() => {
         const fetchProductoBD = async () => {
-            const productoObtenido = await ObtenerProductoPorId(producto.id_producto);
+            //console.log("producto: ", producto);
+            const productoObtenido = await ObtenerProductoPorId(producto.idProducto);
             setProductoBD(productoObtenido);
             //si el producto tiene una promocion, calcular el total con la promocion 
             if (productoObtenido.promocion) {
@@ -29,10 +30,10 @@ const ProductoCarrito = ({ producto }) => {
         return <div>Cargando...</div>;
     }
     return (
-        <div className='carrito-producto-container gap-10px'>
+        <div className='carrito-producto-container'>
             <Link to={`/producto/${productoBD.id}`}>
                 <img
-                    src={`${import.meta.env.VITE_URL_API}/uploads/${productoBD.imagenes.split(',')[0]}`}
+                    src={`${import.meta.env.VITE_URL_API2}/uploads/${productoBD.imagenes.split(',')[0]}`}
                     alt={productoBD.nombre}
                     className='carrito-producto-imagen'
                 />

@@ -1,75 +1,153 @@
-.inicio-nombre {
-    font-size: 1.2rem;
-    width: 50rem;
-    max-width: 90%;
-    text-align: center;
-    color: var(--negro);
-    margin: 1.5rem 0;
-    font-weight: 400;
-}
-
-.inicio-mensaje {
-    font-size: 1.2em;
-    margin-bottom: 2rem;
-    max-width: 80%;
-    text-align: center;
-    color: var(--negro);
-}
-
-.inicio-menu {
+.contenedor-filtro-cards {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem 2rem;
-    width: 1000px;
-    max-width: 95%;
-    margin-bottom: 1rem;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
-@media (max-aspect-ratio: 1/1) {
-    .inicio-menu {
-        gap: .5rem;
+.filtros {
+    background-color: var(--blanco);
+    width: 350px;
+    height: calc(100vh - 125px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 150px;
+    box-sizing: border-box;
+    border-right: 2px solid var(--claro);
+}
+
+@media (min-aspect-ratio: 1/1) {
+    .filtros::-webkit-scrollbar {
+        width: 10px;
+        background-color: var(--claro);
+    }
+
+    .filtros::-webkit-scrollbar-thumb {
+        width: 10px;
+        background-color: var(--gris);
     }
 }
 
-.inicio-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--negro);
-    width: 250px;
-    height: 120px;
-    border-radius: 8px;
-    outline: 2px solid rgba(0, 0, 0, 0.1);
-    transition: 0.3s ease-in-out;
+@media (max-aspect-ratio: 1/1) {
+
+    .contenedor-filtro-cards {
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin: 0;
+    }
+
+    .filtros {
+        width: 200px;
+        height: calc(100vh - 125px);
+        margin: 0;
+        padding: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-bottom: 200px;
+        padding-top: 10px;
+        transition: .3s ease-in-out;
+        box-sizing: border-box;
+        border-right: 2px solid var(--claro);
+    }
+
+    .filtros-title {
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        color: var(--negro) ;
+        margin-top: 5px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+    }
+
+    .checkbox-group {
+        border: 1px solid var(--secundario) !important;
+    }
+
+    .marca-checkbox {
+        font-size: 14px !important;
+        margin: 0 !important;
+        padding: 8px 4px !important;
+    }
+
+    .checkbox-input {
+        margin: 5px !important;
+    }
 }
 
-.inicio-card:hover {
-    outline-color: var(--claro);
+.filtros-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--negro);
+    margin-bottom: 10px;
+    display: block;
 }
 
-.inicio-card-img {
-    width: 50px;
+.checkbox-group {
+    width: 100%;
     height: auto;
-    margin-bottom: 1rem;
-    padding: 1rem 0 0 0;
+    max-height: 180px;
+    border: 1px solid var(--secundario);
+    background-color: var(--blanco);
+    font-size: 16px;
+    color: var(--negro);
+    overflow-y: auto;
+    outline: none;
+    margin-bottom: 20px;
 }
 
-.inicio-card div {
-    max-width: 60%;
-    margin-left: 1rem;
-    color: var(--blanco);
-    font-size: 1rem;
+@media (min-aspect-ratio: 1/1) {
+    .checkbox-group::-webkit-scrollbar {
+        width: 5px;
+        background-color: var(--blanco);
+    }
+
+    .checkbox-group::-webkit-scrollbar-thumb {
+        width: 5px;
+        background-color: var(--secundario);
+    }
+}
+
+.marca-checkbox {
+    display: flex;
+    align-items: center;
+    background-color: var(--blanco);
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    font-size: 16px;
     font-weight: 400;
-    text-align: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    color: var(--negro);
+    position: relative;
+    outline: 1px solid var(--blanco);
+    text-wrap: pretty;
 }
 
-.mis-reportes {
-    background-color: blueviolet;
+.checkbox-input {
+    cursor: pointer;
+    margin-right: 10px;
+    display: none;
 }
-.whatsapp {
-    background-color: #47C357;
+
+.marca-checkbox-seleccionada {
+    background-color: var(--gris) !important;
+    color: var(--blanco) !important;
+}
+
+
+
+.sin-resultados {
+    width: 100%;
+    text-align: center;
 }

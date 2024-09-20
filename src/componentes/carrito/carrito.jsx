@@ -7,7 +7,7 @@ import Loader from '../../ui/loader/loader';
 import './carrito.css';
 
 const Carrito = () => {
-    const { productos, vaciarCarrito, eliminarProducto, aumentarCantidad, disminuirCantidad } = useCarrito();
+    const { productosCarrito, vaciarCarrito, eliminarProducto, aumentarCantidad, disminuirCantidad } = useCarrito();
     const [notificacion, setNotificacion] = useState(null);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -23,8 +23,8 @@ const Carrito = () => {
             setLoading(true);
             let nuevoTotal = 0;
 
-            for (const producto of productos) {
-                const id = producto.id_producto;
+            for (const producto of productosCarrito) {
+                const id = producto.idProducto;
                 const productoBD = await fetchProductoBD(id);
 
                 if (productoBD.promocion) {
@@ -44,7 +44,7 @@ const Carrito = () => {
         };
 
         calcularTotal();
-    }, [productos]);
+    }, [productosCarrito]);
 
     const mostrarNotificacion = (mensaje) => {
         setNotificacion(mensaje);
@@ -58,18 +58,19 @@ const Carrito = () => {
     };
 
     const handleEliminarProducto = (id) => {
-        mostrarNotificacion('Producto eliminado del carrito');
         eliminarProducto(id);
+        mostrarNotificacion('Producto eliminado del carrito');
     };
 
-    const handleAumentarCantidad = (id, cantidad, talla) => () => {
+    const handleAumentarCantidad = (id, talla) => () => {
+        console.log("talla: ", talla);
+        aumentarCantidad(id, talla);
         mostrarNotificacion('Cantidad aumentada');
-        aumentarCantidad(id, cantidad, talla);
     }
 
-    const handleDisminuirCantidad = (id, cantidad, talla) => () => {
+    const handleDisminuirCantidad = (id) => () => {
+        disminuirCantidad(id);
         mostrarNotificacion('Cantidad disminuida');
-        disminuirCantidad(id, cantidad, talla);
     }
 
     const handleComprar = () => {
@@ -84,19 +85,19 @@ const Carrito = () => {
                 <Loader />
             ) : (
                 <>
-                    {productos.length === 0 ? (
+                    {productosCarrito.length === 0 ? (
                         <p>No hay productos en el carrito</p>
                     ) : (
                         <>
                             <div className='contenedor-vertical'>
-                                {productos.map(producto => (
+                                {productosCarrito.map(producto => (
                                     <div key={producto.id} className='contenedor-horizontal-extendido gap-10px'>
                                         <ProductoCarrito producto={producto} />
                                         <div className='contenedor-vertical-auto gap-10px'>
                                             <button className='boton-secundario' onClick={() => handleEliminarProducto(producto.id)}>Eliminar</button>
                                             <div className='cantidad'>
-                                                <button className='boton-cantidad' onClick={handleDisminuirCantidad(producto.id_producto, producto.cantidad, producto.talla)}>-</button>
-                                                <button className='boton-cantidad' onClick={handleAumentarCantidad(producto.id_producto, producto.cantidad, producto.talla)}>+</button>
+                                                <button className='boton-cantidad' onClick={handleDisminuirCantidad(producto.id)}>-</button>
+                                                <button className='boton-cantidad' onClick={handleAumentarCantidad(producto.id, producto.talla)}>+</button>
                                             </div>
                                         </div>
                                     </div>

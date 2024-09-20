@@ -12,16 +12,27 @@ import './SideBar.css';
 
 
 function SideBar() {
-    const { userLogged, userGoogle, user } = useUserInfo();
-    const imgUser = user?.imageUrl || UserIcon;
-    const linkInicio = userLogged ? '/usuario' : '/iniciar-sesion';
+    const { userLogged, imgGoogle } = useUserInfo();
+    //si existe la imagen de google, ponerla, sino poner la imagen de usuario
+    const imgUser = imgGoogle || UserIcon;
+    const [linkInicio, setLinkInicio] = useState('/iniciar-sesion');
     useEffect(() => {
         if (userLogged) {
-            //console.log('Usuario logeado:', user);
+            setLinkInicio('/usuario');
+        } else {
+            setLinkInicio('/iniciar-sesion');
         }
-    }, [userLogged, userGoogle, user]);
+    }, [userLogged]);
 
-    const { productos } = useCarrito();
+    useEffect(() => {
+    }, [linkInicio]);
+
+
+    const { cantidadProductosCarrito } = useCarrito();
+    useEffect(() => {
+        //console.log("cantidad de productos en el carrito: ", cantidadProductosCarrito);
+    }, [cantidadProductosCarrito]);
+
     const modulos = localStorage.getItem('modulos')?.split(',') || [];
     // ejemplo de modulos: ["crear-denuncia", "mis-denuncias"]
     const location = useLocation();
@@ -94,8 +105,8 @@ function SideBar() {
                 >
                     <img className="sidebar-carrito" src={Carrito} alt="carrito de compras" />
                     {/** poner el numero de productos que hay en el carrito en un circulito anajo en la derecha*/}
-                    {productos && productos.length > 0 && (
-                        <div className='sidebar-carrito-cant'>{productos.length}</div>
+                    {cantidadProductosCarrito > 0 && (
+                        <div className='sidebar-carrito-cant'>{cantidadProductosCarrito}</div>
                     )}
                 </Link>
             </div>

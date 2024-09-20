@@ -10,10 +10,10 @@ function Layout() {
     return (
         <div className="main-grid">
             <SideBar />
-            <div className="content">
+            <div className="content contenedor-horizontal-arriba-centro">
                 <Outlet />
             </div>
-            <div className="footer">Derechos reservados &copy; {}</div>
+            {/*<div className="footer">Derechos reservados &copy; {}</div>*/}
         </div>
     );
 };

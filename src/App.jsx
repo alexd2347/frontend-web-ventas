@@ -1,10 +1,10 @@
+import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './componentes/layout/Layout'
 import Inicio from './componentes/inicio/Inicio'
 import Promociones from './componentes/promocion/promocion'
 import Nuevo from './componentes/nuevo/nuevo'
 import PageNotFound from './componentes/pageNotFound/PageNotFound'
-import InicioSession from './componentes/inicio-session/inicioSession'
 import Carrito from './componentes/carrito/carrito'
 import Producto from './ui/producto/producto'
 import Buscar from './componentes/buscar/buscar'
@@ -19,13 +19,19 @@ import Pedidos from './componentes/admin/pedidos/pedidos'
 import Usuarios from './componentes/admin/usuarios/usuarios'
 import Productos from './componentes/admin/productos/productos'
 
+import InicioSession from './componentes/inicio-session/inicioSession'
+import Registro from './componentes/inicio-session/registro/registro'
 
 import './App.css'
 
-import whattsapp from './assets/whatsapp.webp';
+import whattsapp from './assets/whats.png';
+import facebook from './assets/facebook.png';
+
+import { useUserInfo } from './userInfoContext';
 
 function App() {
-  const version = '1.0.1';
+  const { rol } = useUserInfo();
+  const version = '1.3.18';
   //guardar en el local storage los modulos que tiene el usuario solo tiene inicio
   localStorage.setItem('modulos', 'promociones,nuevo');
 
@@ -60,8 +66,12 @@ function App() {
           path="/iniciar-sesion"
           element={<InicioSession />}
         />
+        <Route
+          path="/registro"
+          element={<Registro />}
+        />
       </Routes>
-      <div className='version'>Version: {version}</div>
+      <div className='version'>{version}</div>
       <a
         className='whatsapp'
         href="https://wa.me/524435048995"
@@ -70,6 +80,15 @@ function App() {
       >
         <img className='img-whatsapp' alt='whatsapp icono' src={whattsapp} />
       </a>
+      <a
+        className='facebook'
+        href="https://www.facebook.com/profile.php?id=61556679508345"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img className='img-facebook' alt='facebook icono' src={facebook} />
+      </a>
+
     </div>
   )
 }

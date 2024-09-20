@@ -12,6 +12,7 @@
     margin-bottom: 10px;
     overflow-y: auto;
     transition: .3s ease-in-out;
+    box-sizing: border-box;
 }
 
 .carrito-producto-container:hover {
@@ -21,7 +22,7 @@
 .carrito-producto-imagen {
     height: 150px;
     width: 150px;
-    object-fit: contain;
+    object-fit: cover;
     cursor: pointer;
     transition: .3s ease-in-out;
 }

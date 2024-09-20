@@ -10,15 +10,14 @@ import direccionesIco from '../../assets/direcciones.png';
 
 const Usuario = () => {
     const [loading, setLoading] = useState(true);
-    const { userLogged, setUserLogged, userGoogle, setUserGoogle, user, setUser, cerrarSesion } = useUserInfo();
-    const imgUser = user?.imageUrl || UserIcon;
+    const { name, email, rol, userLogged, idGoogle, telefono, imgGoogle, cerrarSesion } = useUserInfo();
+    const imgUser = imgGoogle || UserIcon;
 
     useEffect(() => {
         if (userLogged) {
-            //console.log('Usuario logeado:', user);
             setLoading(false);
         }
-    }, [userLogged, userGoogle, user]);
+    }, [userLogged]);
 
     return (
         <div className='content contenedor-vertical-arriba-centro'>
@@ -29,8 +28,8 @@ const Usuario = () => {
                     <div className="card-horizontal">
                         <img src={imgUser} alt="imagen-usuario" className="imagen-usuario" />
                         <div className="card-details">
-                            <div className="dato">{user.name}</div>
-                            <div className="dato">{user.email}</div>
+                            <div className="dato">{name}</div>
+                            <div className="dato">{email}</div>
                         </div>
                     </div>
 
@@ -43,7 +42,7 @@ const Usuario = () => {
                 <Link to="/mis-pedidos" className="boton-primario">
                     <img src={pedidosIco} alt="Icono de pedidos" className="icono-boton" />
                     Mis pedidos
-                    <span className="descripcion-boton">Revisa tus pedidos anteriores</span>
+                    <span className="descripcion-boton">Revisa tus pedidos</span>
                 </Link>
                 <Link to="/mis-direcciones" className="boton-primario">
                     <img src={direccionesIco} alt="Icono de direcciones" className="icono-boton" />

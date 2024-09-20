@@ -18,7 +18,7 @@ function Nuevo() {
     }, []);
 
     return (
-        <div className='content contenedor-horizontal-arriba-centro'>
+        <>
             {loading ? (
                 <Loader />
             ) : (
@@ -28,7 +28,7 @@ function Nuevo() {
                     ))}
                 </div>
             )}
-        </div>
+        </>
     );
 }
 

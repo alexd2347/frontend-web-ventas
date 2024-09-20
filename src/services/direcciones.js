@@ -1,6 +1,7 @@
-const URL = `${import.meta.env.VITE_URL_API}${import.meta.env.VITE_PATH4}`;
+const URL = `${import.meta.env.VITE_URL_API}${import.meta.env.VITE_PATH5}`;
 
-export const ObtenerCarritos = async () => {
+
+export const ObtenerDirecciones = async () => {
     try {
         const response = await fetch(URL);
         const data = await response.json();
@@ -11,12 +12,11 @@ export const ObtenerCarritos = async () => {
     }
 }
 
-export const CrearCarrito = async (carrito) => {
+export const CrearDireccion = async (direccion) => {
     try {
-        console.log(carrito);
         const response = await fetch(URL, {
             method: 'POST',
-            body: JSON.stringify(carrito),
+            body: JSON.stringify(direccion),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -30,17 +30,18 @@ export const CrearCarrito = async (carrito) => {
     }
 }
 
-export const ObtenerCarritoPorId = async (id) => {
+
+export const ObtenerDireccionPorIdUsuario = async (id) => {
     try {
         const response = await fetch(`${URL}/${id}`);
-        const carrito = await response.json();
-        return carrito;
+        const direccion = await response.json();
+        return direccion;
     } catch (error) {
         console.error(error);
     }
 }
 
-export const EliminarCarrito = async (id) => {
+export const EliminarDireccion = async (id) => {
     try {
         const response = await fetch(`${URL}/${id}`, {
             method: 'DELETE',
@@ -54,14 +55,11 @@ export const EliminarCarrito = async (id) => {
     }
 }
 
-export const ActualizarCarrito = async (id, carrito) => {
+export const ActualizarDireccion = async (id, direccion) => {
     try {
-        //console.log(carrito);
-        //console.log(id);
-        //console.log(`${URL}/${id}`);
         const response = await fetch(`${URL}/${id}`, {
             method: 'PUT',
-            body: JSON.stringify(carrito),
+            body: JSON.stringify(direccion),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -75,15 +73,3 @@ export const ActualizarCarrito = async (id, carrito) => {
     }
 }
 
-export const ObtenerCarritoPorUsuario = async (id) => {
-    try {
-        const response = await fetch(`${URL}/usuario/${id}`);
-        const carrito = await response.json();
-        if (!response.ok) {
-            throw new Error('Error en la respuesta de la red');
-        }
-        return carrito;
-    } catch (error) {
-        console.error(error);
-    }
-}

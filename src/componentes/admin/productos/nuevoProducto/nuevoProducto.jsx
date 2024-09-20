@@ -1,90 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { CrearProducto } from '../../../../services/productos';
+import { useProductosData } from '../../../../productosDataContext'; 
 import imagen from '../../../../assets/imagen.webp';
 import Notificacion from '../../../../ui/notificacion/Notificacion';
 import './nuevoProducto.css';
 
 const NuevoProducto = ({ cerrar }) => {
-    const marcas = [
-        'Abercrombie',
-        'Abercrombie Dama',
-        'Amiri',
-        'Amiri Dama',
-        'Armani',
-        'Armani Dama',
-        'Burberry',
-        'Burberry Dama',
-        'Calvin Klein',
-        'Calvin Klein Dama',
-        'Coach',
-        'Coach Dama',
-        'Expres',
-        'Expres Dama',
-        'Gucci',
-        'Gucci Dama',
-        'Guess',
-        'Guess Dama',
-        'Hugo Boss',
-        'Hugo Boss Dama',
-        'Karl Lagerfeld',
-        'Karl Lagerfeld Dama',
-        'Kit',
-        'Kit Dama',
-        'Lacoste',
-        'Lacoste Dama',
-        'Louis Vuitton',
-        'Louis Vuitton Dama',
-        'Michael Kors',
-        'Michael Kors Dama',
-        'Nautica',
-        'Nautica Dama',
-        'Palm Angels',
-        'Palm Angels Dama',
-        'Penguin',
-        'Penguin Dama',
-        'Psycho Bunny',
-        'Psycho Bunny Dama',
-        'Ralph Lauren',
-        'Ralph Lauren Dama',
-        'Tommy',
-        'Tommy Dama'
-    ];
-
-    const tiposCamisas = [
-        'Camisa',
-        'Playera',
-        'Blusa',
-        'Sudadera',
-        'Sweater',
-        'Playera Cuello Polo',
-        'Playera Manga Larga',
-    ];
-
-    const tiposPantalones = [
-        'Pantalón',
-        'Jogger',
-        'Shorts',
-    ];
-
-    const colores = [
-        'Amarillo',
-        'Azul',
-        'Beige',
-        'Blanco',
-        'Celeste',
-        'Gris',
-        'Lila',
-        'Cafe',
-        'Morado',
-        'Naranja',
-        'Negro',
-        'Rosa',
-        'Rojo',
-        'Turquesa',
-        'Vino',
-        'Verde',
-    ];
-
+    const { marcas, tiposCamisas, tiposPantalones, colores } = useProductosData();
 
     const [notificacion, setNotificacion] = useState(null);
 
@@ -116,9 +38,26 @@ const NuevoProducto = ({ cerrar }) => {
     }, [tipo, marca, numero, tallas, color]);
 
     useEffect(() => {
-        const cantidadArray = tallas.split(',').map(() => 1);
-        setCantidades(cantidadArray);
+        const tallasArray = tallas.split(',');
+        const nuevasCantidades = tallasArray.map((talla, index) => {
+            // Si la talla ya existe en las cantidades actuales, mantener su valor, de lo contrario, inicializar en 1
+            return cantidades[index] || 1;
+        });
+        setCantidades(nuevasCantidades);
     }, [tallas]);
+
+    const handleTallasChange = (e) => {
+        const nuevasTallas = e.target.value.split(',');
+        const nuevasCantidades = nuevasTallas.map((talla, index) => {
+            const tallaExistenteIndex = tallas.split(',').indexOf(talla);
+            // Mantener la cantidad de la talla existente si está presente
+            return tallaExistenteIndex !== -1 ? cantidades[tallaExistenteIndex] : 1;
+        });
+
+        setTallas(e.target.value);
+        setCantidades(nuevasCantidades);
+    };
+
 
     const handleTipoChange = (e) => {
         const selectedTipo = e.target.value;
@@ -131,12 +70,6 @@ const NuevoProducto = ({ cerrar }) => {
         }
     };
 
-    const handleTallasChange = (e) => {
-        setTallas(e.target.value);
-        const cantidadArray = e.target.value.split(',').map(() => 1);
-        setCantidades(cantidadArray);
-    };
-
     const handleCantidadChange = (index, value) => {
         const newCantidades = [...cantidades];
         newCantidades[index] = value;
@@ -144,22 +77,27 @@ const NuevoProducto = ({ cerrar }) => {
     };
 
     const handleFileChange = (e) => {
-        if (e.target.files.length <= 3) {
-            const files = e.target.files;
+        const newFiles = e.target.files;
+        const totalFiles = Array.from(fotos).concat(Array.from(newFiles));
+
+        if (totalFiles.length <= 3) {
             const filePreviews = [];
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
+            const filesToShow = totalFiles.slice(0, 3); // Limitar a 3 fotos
+
+            for (let i = 0; i < filesToShow.length; i++) {
+                const file = filesToShow[i];
                 const preview = URL.createObjectURL(file);
                 filePreviews.push(preview);
             }
-            setFotos(Array.from(files));
+
+            setFotos(filesToShow);
             setPreviewFotos(filePreviews);
         } else {
-            setPopupMensaje('Solo se pueden subir hasta 3 fotografías');
-            setPopupKey(prevKey => prevKey + 1);
+            mostrarNotificacion('Solo puedes subir hasta 3 fotos');
             e.target.value = null;
         }
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -197,7 +135,10 @@ const NuevoProducto = ({ cerrar }) => {
         for (let i = 0; i < fotos.length; i++) {
             formData.append('imagenes', fotos[i]);
         }
-
+        //poner en consolo.log el formData
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
         try {
             await CrearProducto(formData);
             mostrarNotificacion('Producto creado exitosamente');
@@ -210,6 +151,20 @@ const NuevoProducto = ({ cerrar }) => {
     const handleCerrarFormulario = () => {
         cerrar();
     };
+
+
+    const handleBorrarFoto = (index) => (e) => {
+        e.preventDefault(); // Esto previene que el botón cause un comportamiento no deseado
+        const newFotos = Array.from(fotos);
+        newFotos.splice(index, 1);
+
+        const newPreviewFotos = Array.from(previewFotos);
+        newPreviewFotos.splice(index, 1);
+
+        setFotos(newFotos);
+        setPreviewFotos(newPreviewFotos);
+    }
+
 
     return (
         <div className='popup-overlay'>
@@ -317,12 +272,15 @@ const NuevoProducto = ({ cerrar }) => {
                         {previewFotos.length > 0 && (
                             <div className='fotos-preview'>
                                 {previewFotos.map((foto, index) => (
-                                    <img
-                                        key={index}
-                                        src={foto}
-                                        alt={`Foto ${index + 1}`}
-                                        className='foto-preview'
-                                    />
+                                    <div className="contenedor-foto">
+                                        <img
+                                            key={index}
+                                            src={foto}
+                                            alt={`Foto ${index + 1}`}
+                                            className='foto-preview'
+                                        />
+                                        <button className='boton-X' onClick={handleBorrarFoto(index)}>X</button>
+                                    </div>
                                 ))}
                             </div>
                         )}

@@ -35,7 +35,7 @@ const ProductoCard = ({ producto }) => {
     return (
         <Link to={`/producto/${producto.id}`} className="producto-card">
             <img
-                src={`${import.meta.env.VITE_URL_API}/uploads/${imagenActual}`}
+                src={`${import.meta.env.VITE_URL_API2}/uploads/${imagenActual}`}
                 alt={producto.nombre}
                 className={blur ? 'blur' : ''}
             />

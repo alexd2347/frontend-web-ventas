@@ -1,4 +1,3 @@
-
 const URL = `${import.meta.env.VITE_URL_API}${import.meta.env.VITE_PATH3}`;
 
 export const ObtenerUsuarios = async () => {
@@ -11,7 +10,6 @@ export const ObtenerUsuarios = async () => {
         return [];
     }
 }
-
 export const CrearUsuario = async (usuario) => {
     try {
         const response = await fetch(URL, {
@@ -21,6 +19,7 @@ export const CrearUsuario = async (usuario) => {
                 'Content-Type': 'application/json',
             },
         });
+
         if (!response.ok) {
             throw new Error('Error en la respuesta de la red');
         }
@@ -28,41 +27,38 @@ export const CrearUsuario = async (usuario) => {
     } catch (error) {
         console.error(error);
     }
-}
+};
 
 
 export const ObtenerUsuarioPorGoogleId = async (googleId) => {
     try {
-        const response = await fetch(`${URL}/google/${googleId}`);
-        const usuario = await response.json();
+        const response = await fetch(URL);
+        const usuarios = await response.json();
+        const usuario = usuarios.find((usuario) => usuario.idGoogle === googleId);
         return usuario;
     } catch (error) {
         console.error(error);
     }
 }
 
-export const ObtenerUsuario = async (email, password) => {
+export const IniciarSession = async (email, password) => {
     try {
-        const response = await fetch(`${URL}/login`, {
-            method: 'POST',
-            body: JSON.stringify({ email, password }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if (!response.ok) {
-            throw new Error('Error en la respuesta de la red');
-        }
-
-        const usuario = await response.json();
-
-        // Verifica que el objeto usuario tenga las propiedades esperadas
-        if (!usuario || !usuario.id || !usuario.rol) {
-            throw new Error('Usuario no válido');
-        }
+        const response = await fetch(URL);
+        const usuarios = await response.json();
+        const usuario = usuarios.find((usuario) => usuario.email === email && usuario.password === password);
         return usuario;
     } catch (error) {
-        console.error('Error en ObtenerUsuario:', error);
-        return null; // Retornar null en caso de error
+        console.error(error);
+    }
+}
+
+export const verificarUsuario = async (email) => {
+    try {
+        const response = await fetch(URL);
+        const usuarios = await response.json();
+        const usuario = usuarios.find((usuario) => usuario.email === email);
+        return usuario;
+    } catch (error) {
+        console.error(error);
     }
 }

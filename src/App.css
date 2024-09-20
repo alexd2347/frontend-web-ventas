@@ -1,8 +1,8 @@
 :root {
   --primario: #952bff;
-  --gris: rgb(118, 124, 147);
+  --gris: rgb(125, 125, 125);
   --secundario: #b29fff;
-  --claro: rgb(226, 226, 226);
+  --claro: rgb(230, 230, 230);
   --blanco: #ffffff;
   --negro: #333;
   --red: rgb(255, 93, 93);
@@ -10,6 +10,11 @@
   --enviada: #ffb8b4;
   --revision: #ffdfb0;
   --atendida: #baffbe;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
 }
 
 .main {
@@ -23,15 +28,15 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  height: 2.3rem;
-  padding: .5px .9rem;
+  width: auto;
+  height: auto;
+  padding: 5px;
   background-color: var(--negro);
   color: var(--blanco);
-  font-size: .8rem;
-  font-weight: 400;
-  z-index: 99999;
+  font-size: 8px;
+  font-weight: 600;
+  z-index: 999;
   transition: .3s ease-in-out;
-  border-radius: 1rem 0 0 0;
 }
 
 /*------------------whats----------------------------------*/
@@ -39,11 +44,10 @@
 .whatsapp {
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
   width: 60px;
   height: 60px;
-  background-color: #25D366;
-  border-radius: 5rem 5rem 5rem 1rem;
+  background-color: var(--negro);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,9 +58,10 @@
 
 @media (max-aspect-ratio: 1/1) {
   .whatsapp {
-    bottom: 40px;
+    bottom: 20px;
     right: 20px;
-    left: auto;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -67,8 +72,43 @@
 .img-whatsapp {
   width: 70%;
   height: 70%;
+  filter: invert(1);
 }
 
+
+.facebook {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--negro);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: float 2s infinite ease-in-out;
+  transition: transform 0.3s;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .facebook {
+    bottom: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.facebook:hover {
+  transform: scale(1.1);
+}
+
+.img-facebook {
+  width: 70%;
+  height: 70%;
+  filter: invert(1);
+}
 
 /*----------------------animaciones----------------*/
 @keyframes float {
@@ -111,9 +151,22 @@
 
 
 
+.inputs-container {
+  background-color: var(--claro);
+  padding: 10px;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: center;
+}
 
 /*-------------BOTONES-------------*/
 .boton-primario {
+  text-wrap: nowrap;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -125,7 +178,7 @@
   padding: 10px 16px;
   outline: none;
   border: none;
-  border: 2px solid var(--primario);
+  outline: 2px solid var(--primario);
   transition: .3s ease-in-out;
 }
 
@@ -134,6 +187,7 @@
 }
 
 .boton-secundario {
+  text-wrap: nowrap;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -145,8 +199,15 @@
   padding: 10px 16px;
   outline: none;
   border: none;
-  border: 2px solid var(--secundario);
+  outline: 2px solid var(--secundario);
   transition: .3s ease-in-out;
+}
+
+.boton-primario:disabled {
+  background-color: var(--secundario);
+  color: var(--blanco);
+  cursor: not-allowed;
+  outline: 2px solid var(--blanco);
 }
 
 .boton-secundario:hover {
@@ -163,8 +224,9 @@
   width: calc(100% - 32px);
   margin: 4px 0px;
   padding: 10px 16px;
-  border-bottom: 2px solid var(--claro);
-  color: var(--blanco);
+  background-color: var(--blanco);
+  border-bottom: 2px solid var(--gris);
+  color: var(--negro);
   font-size: 16px;
   transition: .3s ease-in-out;
 }
@@ -190,9 +252,8 @@
 
 .separador {
   width: 100%;
-  height: 3px;
-  border-radius: 10rem;
-  background-color: var(--secundario);
+  height: 2px;
+  background-color: var(--claro);
   margin: 10px 0;
 }
 

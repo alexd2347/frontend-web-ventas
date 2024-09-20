@@ -30,22 +30,11 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0;
-    justify-content: center;
-    align-items: center;
-    padding: 0 300px;
-    padding-bottom: 200px;
-    gap: 20px;
-    width: calc(100% - 600px);
+    padding: 50px 200px;
+    gap: 50px 40px;
+    width: calc(100% - 400px);
 }
 
-@media (max-width: 1500px) {
-    .contenedor-cards {
-        padding: 0 50px;
-        width: calc(100% - 100px);
-    }
-    
-}
 
 @media (max-aspect-ratio: 1/1) {
     .contenedor-cards {
@@ -54,14 +43,12 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        gap: 0;
-        justify-content: center;
-        align-items: center;
-        padding-bottom: 100px;
-        width: 100%;
-        gap: 10px;
-        padding: 0;
+        padding: 20px 0px;
         margin: 0;
+        gap: 20px 10px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-y: hidden;
     }
 }
 
@@ -75,7 +62,6 @@
     .content::-webkit-scrollbar-thumb {
         width: .8rem;
         background-color: var(--negro);
-        border-radius: 3rem;
     }
 }
 

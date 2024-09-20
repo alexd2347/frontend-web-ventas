@@ -1,0 +1,54 @@
+.fotos-preview-actualizar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.foto-container-actualizar {
+    position: relative;
+}
+
+.foto-preview-actualizar {
+    width: 100px;
+    height: 120px;
+    display: block;
+    object-fit: cover;
+    border: 1px solid var(--claro);
+}
+
+.delete-button-actualizar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--red);
+    color: var(--blanco);
+    border: none;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.delete-button-actualizar:hover {
+    filter: saturate(2);
+}
+
+.contenedor-foto {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    /* Espacio entre los elementos */
+}
+
+.boton-X {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+    color: var(--blanco);
+    background-color: var(--red);
+    /* Color rojo para la X */
+}
